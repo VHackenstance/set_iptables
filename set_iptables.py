@@ -2,23 +2,23 @@
 import subprocess
 import argparse
 
-def set_iptables():
+def set_pytables():
     parser = argparse.ArgumentParser()
     parser.add_argument("-r", "--remote", dest="remote", help="Test against a remote Target.")
-    parser.add_argument("-s", "--set", dest="setiptables", help="Set IP Tables.")
+    parser.add_argument("-l", "--local", dest="local", help="Set IP Tables.")
     parser.add_argument("-n", "--number", dest="number", help="iptables number to set.")
     parser.add_argument("-f", "--flush", dest="flush", help="Flush the iptables.")
     options = parser.parse_args()
 
-    if options.setiptables and options.number:
+    if options.number:
         number = options.number
-        print("[+] We have a request to set the iptables to: " + number)
+        print("[+] Request to set iptables to: " + number)
         if options.remote:
-            print("[+] We have a request to test to a remote target using FORWARD.")
+            print("[+] Test to remote target using FORWARD.")
             subprocess.call(
                 ["sudo", "iptables", "-I", "FORWARD", "-j", "NFQUEUE", "--queue-num", number, "--queue-bypass"])
-        else:
-            print("[+] We have a request to test locally using INPUT and OUTPUT.")
+        elif options.local:
+            print("[+] Test locally using INPUT and OUTPUT.")
             subprocess.call(["sudo", "iptables", "-I", "INPUT", "-j", "NFQUEUE", "--queue-num", number, "--queue-bypass"])
             subprocess.call(["sudo", "iptables", "-I", "OUTPUT", "-j", "NFQUEUE", "--queue-num", number, "--queue-bypass"])
         print("[+] Check the iptables have been set:\n")
@@ -30,7 +30,5 @@ def set_iptables():
         print("[+] Check if the iptables have been flushed.\n")
         subprocess.call(["sudo", "iptables", "-L"])
 
-print("\n[+] Hello World!  This is set_iptables")
-set_iptables()
-
-
+print("\n[+] Hello, this is set_iptables.  Keep smiling!")
+set_pytables()
