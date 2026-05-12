@@ -24,23 +24,5 @@
 </ul>
 
 <p>The script with automatically show you the chain by running: <b>sudo iptables -L -n</b></p>
-
-
-
-
-<p><b>iptables --flush</b></p>
 <p>And there will be zero rules under the chains (headings)</p>
-<h4></h4>
-<p><b></b>.  <b></b></p>
-
-
-<p>Run script: <b>sudo python dns_spoof.py</b> in one terminal window.</p>
-<p>Run ping: <b>ping -c 1 www.bing.com, </b>in another window.  You should get the following with your IP</p>
-![ping_screen_shot.png](assets/ping_screen_shot.png)
-<p>So, the target has requested to go to bing.com, but the 
-IP we have returned is a spoofed IP and will take it somewhere
-else.</p>
-<h4>Kali Linux create webserver and your own index page on your IP</h4>
-<p>When the user tries to navigate to www.bing.com they will be taken to our local page.</p>
-<h3>To Test on a Remote VM.</h3>
 
